@@ -48,16 +48,6 @@ public class ScoreMenuHandlers : MonoBehaviour
         SceneManager.LoadScene("PlayScene");
 	}
 
-    public void ShowOptionsMenu()
-    {
-        Anim.SetTrigger("StartOptionsFadeIn");
-    }
-
-    public void HideOptionsMenu()
-    {
-        Anim.SetTrigger("StartOptionsFadeOut");
-    }
-
 	public void ShowScoreMenu()
 	{
 		IsVisible = true;
@@ -85,4 +75,14 @@ public class ScoreMenuHandlers : MonoBehaviour
 		
 		Global.Instance.IsPlaying = true;
 	}
+
+    public void ShowOptionsMenu() {
+        if (IsVisible) {
+            Anim.SetTrigger("StartOptionsFadeIn");
+        }
+    }
+
+    public void HideOptionsMenu() {
+        Anim.SetTrigger("StartOptionsFadeOut");
+    }
 }

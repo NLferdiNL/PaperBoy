@@ -25,6 +25,12 @@ public class HouseBehaviour : BasicObstacleBehaviour
 
 	private GameObject TreeContainer;
 
+    private ParticleSystem DeliverParticles;
+
+    void Start() {
+        DeliverParticles = transform.FindChild("Particle System").GetComponent<ParticleSystem>();
+    }
+    
 	public void SetRight(bool IsRight)
 	{
 		this.IsRight = IsRight;
@@ -56,6 +62,8 @@ public class HouseBehaviour : BasicObstacleBehaviour
 		{
 			Global.Instance.Dollars++;
 
+            DeliverParticles.Play();
+
 			Global.Instance.ComboMultiplier += 0.01F;
 		}
 		else
@@ -67,7 +75,6 @@ public class HouseBehaviour : BasicObstacleBehaviour
 		}
 
 		GetComponent<Animator>().SetTrigger("Deliver");
-		transform.FindChild("Particle System").GetComponent<ParticleSystem>().Play();
 
 		HasDelivered = true;
 	}
