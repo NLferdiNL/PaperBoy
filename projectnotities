@@ -1,0 +1,29 @@
+Project details:
+
+- 1 van de 3 games kiezen.
+- deze game functioneren fout.
+- oftewel iets klopt niet goed en moet gefikst worden.
+- vier weken om deze fouten eruit te halen.
+- niet de bedoeling de hele game te herschrijven < leugen. moet dus wel
+- unity projecten
+- code op github
+- dus redelijk builden
+- webbuild ( als mobiel spel, word gecheckt of werkende is op mobiel )
+
+deadline: vrijdag 18 maart 23:59
+
+
+Problemen:
+wanneer je een "cola boost" krijgt beweegt de ondergrond snel, maar de huizen(en etc) niet mee
+er reed een auto naast de weg net
+soms(?) spelen er geen particles af als je een goed huis bezorgt
+
+Verbeteringen:
+Er zijn een aantal deprecated methodes en variables die gebruikt worden
+GetComponent werd gebruikt om de rigidbody2d aan van de player aan te roepen in de Update(), in plaats van die in een variable te stoppen via Start() 
+
+Nieuwe bugs:
+settings menu gaat na een delay pas terug naar t pauze menu
+
+Notities:
+het is misschien zo dat er geen enkele telefoon controls gecreerd zijn (shit..)
