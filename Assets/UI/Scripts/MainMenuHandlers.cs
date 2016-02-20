@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MainMenuHandlers : MonoBehaviour 
@@ -64,7 +65,7 @@ public class MainMenuHandlers : MonoBehaviour
 	}
 	private void Play()
 	{
-		Application.LoadLevel("PlayScene");
+		SceneManager.LoadScene("PlayScene");
 	}
 
 	public void ChangeDisco()
