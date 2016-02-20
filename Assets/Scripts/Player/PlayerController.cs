@@ -70,7 +70,7 @@ public class PlayerController : CacheMB
 			#elif UNITY_ANDROID || UNITY_IOS
 			
 			Speed = 20F;		
-			rigidbody2D.velocity = new Vector2(Input.acceleration.x * Speed, 0);
+			Rb2d.velocity = new Vector2(Input.acceleration.x * Speed, 0);
 			
 			#endif
 
