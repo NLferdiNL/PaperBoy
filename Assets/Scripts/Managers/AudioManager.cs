@@ -12,9 +12,9 @@ public class AudioManager : MonoBehaviour
 
 	void Start () 
 	{
-		GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("AudioVolume");
-
 		source = GetComponent<AudioSource>();
+
+		source.volume = PlayerPrefs.GetFloat("AudioVolume");
 	}
 
 	void Update()
@@ -31,5 +31,10 @@ public class AudioManager : MonoBehaviour
 		{
 			source.pitch = Mathf.MoveTowards(source.pitch, NewPitch, 0.7F);
 		}*/
+	}
+
+	public void UpdateVolume()
+	{
+		source.volume = PlayerPrefs.GetFloat("AudioVolume");
 	}
 }

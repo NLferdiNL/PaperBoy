@@ -11,6 +11,9 @@ public class ScoreMenuHandlers : MonoBehaviour
 {
 	private string HighscoreURL = "http://www.basegames.nl/highscores.pl";
 
+	public Slider AudioSlider;
+	public AudioManager AudioMan;
+
 	public Text EndScoreText;
 	public Text DistanceScoreText;
 	public Text PaperScoreText;
@@ -25,6 +28,8 @@ public class ScoreMenuHandlers : MonoBehaviour
 	void Start()
 	{
 		Anim = GetComponent<Animator>();
+
+		AudioSlider.value  = PlayerPrefs.GetFloat("AudioVolume");
 	}
 
 	void Update()
@@ -85,4 +90,11 @@ public class ScoreMenuHandlers : MonoBehaviour
     public void HideOptionsMenu() {
         Anim.SetTrigger("StartOptionsFadeOut");
     }
+
+	public void SetAudioVolume()
+	{
+		PlayerPrefs.SetFloat("AudioVolume", AudioSlider.value);
+		AudioMan.UpdateVolume ();
+	}
 }
+ 

@@ -24,6 +24,3 @@ GetComponent werd gebruikt om de rigidbody2d aan van de player aan te roepen in 
 
 Nieuwe bugs:
 settings menu gaat na een delay pas terug naar t pauze menu
-
-Notities:
-het is misschien zo dat er geen enkele telefoon controls gecreerd zijn (shit..)

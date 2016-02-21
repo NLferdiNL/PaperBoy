@@ -51,30 +51,34 @@ public class PlayerController : CacheMB
 			}
 
 			#region Movement
-			
+
+			Vector2 Movement;
+
 			#if UNITY_STANDALONE || UNITY_EDITOR		
 
 			Speed = 70F;
             
-            Vector2 Movement = new Vector2(Input.GetAxis("Horizontal") * Speed, 0);
-
-            Rb2d.velocity = Movement;
-
-            Rb2d.AddForce(Movement);
+            Movement = new Vector2(Input.GetAxis("Horizontal") * Speed, 0);
 
 			if(Input.GetKeyDown(KeyCode.UpArrow))
 				Global.Instance.Speed++;
 			if(Input.GetKeyDown(KeyCode.DownArrow))
 				Global.Instance.Speed--;
+
+			transform.rotation = Quaternion.Euler(0, 0, -Movement.x / 3f);
 			
 			#elif UNITY_ANDROID || UNITY_IOS
 			
-			Speed = 20F;		
-			Rb2d.velocity = new Vector2(Input.acceleration.x * Speed, 0);
+			Speed = 200F;		
+			Movement = new Vector2(Input.acceleration.x * Speed, 0);
+
+			transform.rotation = Quaternion.Euler(0, 0, -Movement.x / 8.5f);
 			
 			#endif
 
-			transform.rotation = Quaternion.Euler(0, 0, -Rb2d.velocity.x / 3f);
+			Rb2d.AddForce(Movement);
+
+
 
 			#endregion
 
