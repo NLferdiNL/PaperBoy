@@ -17,11 +17,14 @@ public class GameManager : MonoBehaviour
 	void Awake()
 	{		
 		Global.Instance = new Global();
-		if(FindObjectOfType<DiscoSetting>().IsDisco)
-		{
-			Global.Instance.IsDisco = true;
-			Camera.main.gameObject.GetComponent<AudioSource>().clip = FindObjectOfType<DiscoSetting>().DiscoClip;
-		}
+        if (FindObjectOfType<DiscoSetting>() != null) {
+            if (FindObjectOfType<DiscoSetting>().IsDisco) {
+                Global.Instance.IsDisco = true;
+                AudioSource AudioS = Camera.main.gameObject.GetComponent<AudioSource>();
+                AudioS.clip = FindObjectOfType<DiscoSetting>().DiscoClip;
+                AudioS.Play();
+            }
+        }
 
 		ScoreMenu = FindObjectOfType<ScoreMenuHandlers>();
 

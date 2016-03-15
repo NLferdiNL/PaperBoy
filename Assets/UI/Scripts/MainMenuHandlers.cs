@@ -21,6 +21,7 @@ public class MainMenuHandlers : MonoBehaviour
 	public Image[] RainbowImages;
 	
 	private bool IsDisco = false;
+    private AudioSource source;
 	
 	public Text HighscoreText;
 
@@ -31,7 +32,8 @@ public class MainMenuHandlers : MonoBehaviour
 		AudioSlider.value  = PlayerPrefs.GetFloat("AudioVolume");
 		Readonly = false;
 
-		FindObjectOfType<DiscoSetting>().IsDisco = false;		
+		FindObjectOfType<DiscoSetting>().IsDisco = false;
+        source = Camera.main.gameObject.GetComponent<AudioSource>();
 		
 		HighscoreText.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0);
 	}
@@ -75,13 +77,13 @@ public class MainMenuHandlers : MonoBehaviour
 		{
 			StartCoroutine(WaitForColorChange());
 
-			Camera.main.gameObject.GetComponent<AudioSource>().Play();
+			source.Play();
 		}
 		else
 		{
 			StopAllCoroutines();
 
-			Camera.main.gameObject.GetComponent<AudioSource>().Stop();
+            source.Stop();
 
 			foreach(Image bla in RainbowImages)
 			{
@@ -119,6 +121,7 @@ public class MainMenuHandlers : MonoBehaviour
 			return;
 
 		PlayerPrefs.SetFloat("AudioVolume", AudioSlider.value); // Set the volume for the audio under the PlayerPrefs key 'AudioVolume'.
+        source.volume = AudioSlider.value;
 	}
 
 	void OnGUI()

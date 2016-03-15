@@ -19,10 +19,13 @@ public class PlayerController : CacheMB
 
     private Rigidbody2D Rb2d;
 
+    private ParticleSystem.EmissionModule em;
+
 	void Start()
 	{
 		Anim = GetComponent<Animator>();
         Rb2d = GetComponent<Rigidbody2D>();
+        em = ColaBottleParticles.emission;
 	}
 
 	void Update () 
@@ -33,11 +36,11 @@ public class PlayerController : CacheMB
 				Anim.enabled = true;
 			if(ColaBottleParticles != null && CurrentPickup == PickupType.ColaBottle)
 			{
-                ColaBottleParticles.enableEmission = true;
+                em.enabled = true;
 				ColaBottleParticles.GetComponent<Renderer>().material.mainTexture = transform.FindChild("Sprite").GetComponent<Renderer>().material.mainTexture;;
 			}
 			else if(ColaBottleParticles != null)
-				ColaBottleParticles.enableEmission = false;
+                em.enabled = true;
 
 			if(CurrentPickup == PickupType.ColaBottle)
 			{
@@ -51,16 +54,17 @@ public class PlayerController : CacheMB
 			}
 
 			#region Movement
-			
+
+            Vector2 Movement = new Vector2();
+            float Rotation = 0;
+
 			#if UNITY_STANDALONE || UNITY_EDITOR		
 
-			Speed = 70F;
+            Speed = 70f;
             
-            Vector2 Movement = new Vector2(Input.GetAxis("Horizontal") * Speed, 0);
+            Movement.x += Input.GetAxis("Horizontal") * Speed;
 
-            Rb2d.velocity = Movement;
-
-            Rb2d.AddForce(Movement);
+            Rotation = -Input.GetAxis("Horizontal") * 70f;
 
 			if(Input.GetKeyDown(KeyCode.UpArrow))
 				Global.Instance.Speed++;
@@ -68,21 +72,26 @@ public class PlayerController : CacheMB
 				Global.Instance.Speed--;
 			
 			#elif UNITY_ANDROID || UNITY_IOS
+					
+            Speed = 200f;
+
+			Movement.x += Input.acceleration.x * Speed;
+
+            Rotation = -Input.acceleration.x * 70f;
 			
-			Speed = 20F;		
-			Rb2d.velocity = new Vector2(Input.acceleration.x * Speed, 0);
-			
-			#endif
+            #endif
 
-			transform.rotation = Quaternion.Euler(0, 0, -Rb2d.velocity.x / 3f);
+            Rb2d.AddForce(Movement);
 
-			#endregion
+            transform.rotation = Quaternion.Euler(0, 0,  Rotation / 3f);
 
-			#region Touch/Click Input Check
+            #endregion
 
-			#if UNITY_STANDALONE || UNITY_EDITOR		
-			
-			if(Input.GetMouseButtonDown(0))
+            #region Touch/Click Input Check
+
+            #if UNITY_STANDALONE || UNITY_EDITOR
+
+            if (Input.GetMouseButtonDown(0))
 			{
 				Vector3 WorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				Vector2 MousePos = new Vector2(WorldPosition.x, WorldPosition.y);

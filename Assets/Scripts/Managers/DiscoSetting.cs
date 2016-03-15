@@ -32,7 +32,9 @@ public class DiscoSetting : MonoBehaviour
 		if(SceneManager.GetActiveScene().name == "PlayScene")
 		{
 			Global.Instance.IsDisco = IsDisco;
-			Camera.main.gameObject.GetComponent<AudioSource>().clip = DiscoClip;
+            AudioSource AudioS = Camera.main.gameObject.GetComponent<AudioSource>();
+            AudioS.clip = DiscoClip;
+            AudioS.Play();
 		}
 	}
 }

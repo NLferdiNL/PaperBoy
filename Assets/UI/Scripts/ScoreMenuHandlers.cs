@@ -18,6 +18,8 @@ public class ScoreMenuHandlers : MonoBehaviour
 	public float StartDelay = 0.5F;
 	public float TypeDelay = 0.01F;
 
+    public Slider AudioSlider;
+
 	private Animator Anim;
 
 	public bool IsVisible = false;
@@ -25,6 +27,7 @@ public class ScoreMenuHandlers : MonoBehaviour
 	void Start()
 	{
 		Anim = GetComponent<Animator>();
+        AudioSlider.GetComponent<Slider>().value = PlayerPrefs.GetFloat("AudioVolume");
 	}
 
 	void Update()
@@ -84,5 +87,9 @@ public class ScoreMenuHandlers : MonoBehaviour
 
     public void HideOptionsMenu() {
         Anim.SetTrigger("StartOptionsFadeOut");
+    }
+
+    public void OnAudioSliderChange() {
+        PlayerPrefs.SetFloat("AudioVolume", AudioSlider.value); // Set the volume for the audio under the PlayerPrefs key 'AudioVolume'.
     }
 }
